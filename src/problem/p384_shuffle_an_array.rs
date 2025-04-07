@@ -1,5 +1,3 @@
-use rand::prelude::*;
-
 struct Solution {
     original: Vec<i32>,
 }
@@ -20,7 +18,7 @@ impl Solution {
     fn shuffle(&self) -> Vec<i32> {
         let mut nums = self.original.clone();
         for i in (0..nums.len()).rev() {
-            let idx = rand::thread_rng().gen_range(0, i + 1);
+            let idx = rand::random_range(0..=i + 1);
             nums.swap(i, idx);
         }
 

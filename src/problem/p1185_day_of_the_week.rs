@@ -32,7 +32,7 @@ impl Solution {
         ];
 
         weekday[((day
-            + month_day[..month as usize - 1].iter().sum::<i32>()
+            + month_days[..month as usize - 1].iter().sum::<i32>()
             + (1970..year).fold(0, |cnt, i| {
                 cnt + 365
                     + if i % 400 == 0 || (i % 4 == 0 && i % 100 != 0) {

@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn buddy_strings(s: String, goal: String) -> bool {
+    fn buddy_strings(&self, s: String, goal: String) -> bool {
         if s.len() != goal.len() {
             return false;
         }
@@ -19,5 +19,9 @@ impl Solution {
             0 => s.bytes().collect::<std::collections::HashSet<_>>().len() < s.len(),
             _ => false,
         }
+    }
+
+    pub fn run(&self) {
+        self.buddy_strings(s, goal)
     }
 }
