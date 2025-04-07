@@ -78,26 +78,22 @@ where
 pub struct Solution {}
 
 impl Solution {
-    pub fn find_kth_largest(nums: Vec<i32>, k: i32) -> i32 {
+    pub fn new() -> Self {
+        Self {}
+    }
+
+    pub fn run(&self) {
+        assert_eq!(self.find_kth_largest(vec![3, 2, 1, 5, 6, 4], 2), 5);
+
+        assert_eq!(self.find_kth_largest(vec![3, 2, 3, 1, 2, 4, 5, 5, 6], 4), 4);
+    }
+
+    fn find_kth_largest(&self, nums: Vec<i32>, k: i32) -> i32 {
         let mut heap = MaxHeap::new(2 * k as usize);
         nums.iter().for_each(|v| heap.insert(v));
         for _ in 1..k {
             heap.pop_max();
         }
         *heap.pop_max().unwrap()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_215() {
-        assert_eq!(Solution::find_kth_largest(vec![3, 2, 1, 5, 6, 4], 2), 5);
-        assert_eq!(
-            Solution::find_kth_largest(vec![3, 2, 3, 1, 2, 4, 5, 5, 6], 4),
-            4
-        );
     }
 }

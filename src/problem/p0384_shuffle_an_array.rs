@@ -2,10 +2,6 @@ struct Solution {
     original: Vec<i32>,
 }
 
-/**
- * `&self` means the method takes an immutable reference.
- * If you need a mutable reference, change it to `&mut self` instead
- */
 impl Solution {
     fn new(nums: Vec<i32>) -> Self {
         Solution { original: nums }

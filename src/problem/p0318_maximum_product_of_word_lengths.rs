@@ -3,7 +3,23 @@ use std::collections::HashMap;
 pub struct Solution {}
 
 impl Solution {
-    pub fn max_product(words: Vec<String>) -> i32 {
+    pub fn new() -> Self {
+        Self {}
+    }
+
+    pub fn run(&self) {
+        assert_eq!(
+            self.max_product(vec!["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]),
+            16
+        );
+
+        assert_eq!(
+            self.max_product_fast(vec!["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]),
+            16
+        );
+    }
+
+    fn max_product(&self, words: Vec<&str>) -> i32 {
         let masks: Vec<i32> = words
             .iter()
             .map(|word| {
@@ -23,7 +39,7 @@ impl Solution {
         ans as i32
     }
 
-    pub fn max_product_fast(words: Vec<String>) -> i32 {
+    fn max_product_fast(&self, words: Vec<&str>) -> i32 {
         let masks = words.iter().fold(HashMap::new(), |mut map, w| {
             let mask = w.chars().fold(0, |acc, c| acc | 1 << (c as u8 - 'a' as u8));
 
@@ -43,7 +59,7 @@ impl Solution {
         let mut ans = 0;
         for (k1, l1) in masks.iter() {
             for (k2, l2) in masks.iter() {
-                if (k1 & k2 == 0) {
+                if k1 & k2 == 0 {
                     ans = ans.max(l1 * l2);
                 }
             }
