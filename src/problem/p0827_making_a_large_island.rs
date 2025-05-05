@@ -1,6 +1,16 @@
 pub struct Solution;
 
 impl Solution {
+    pub fn new() -> Solution {
+        Self {}
+    }
+
+    pub fn run(&self) {
+        assert_eq!(Self::largest_island(vec![vec![1, 0], vec![0, 1]]), 3);
+        assert_eq!(Self::largest_island(vec![vec![1, 1], vec![1, 0]]), 4);
+        assert_eq!(Self::largest_island(vec![vec![1, 1], vec![1, 1]]), 4);
+    }
+
     fn largest_island(grid: Vec<Vec<i32>>) -> i32 {
         let n = grid.len();
         let mut ids = vec![vec![None; n]; n];

@@ -1,10 +1,22 @@
-struct Solution {
+pub struct Solution {}
+
+impl Solution {
+    pub fn new() -> Self {
+        Solution {}
+    }
+
+    pub fn run(&self) {
+        SolutionWrap::new(vec![1, 2, 3]).shuffle();
+    }
+}
+
+struct SolutionWrap {
     original: Vec<i32>,
 }
 
-impl Solution {
+impl SolutionWrap {
     fn new(nums: Vec<i32>) -> Self {
-        Solution { original: nums }
+        SolutionWrap { original: nums }
     }
 
     fn reset(&self) -> Vec<i32> {

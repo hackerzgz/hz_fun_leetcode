@@ -1,7 +1,15 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn find_nth_digit(n: i32) -> i32 {
+    pub fn new() -> Self {
+        Solution {}
+    }
+    pub fn run(&self) {
+        assert_eq!(Self::find_nth_digit(3), 3);
+        assert_eq!(Self::find_nth_digit(11), 0);
+    }
+
+    fn find_nth_digit(n: i32) -> i32 {
         let mut n = n as i64;
         let (mut d, mut base) = (1, 1);
         while n > d * 9 * base {

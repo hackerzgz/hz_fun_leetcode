@@ -1,6 +1,15 @@
 pub struct Solution {}
 
 impl Solution {
+    pub fn new() -> Self {
+        Solution {}
+    }
+    pub fn run(&self) {
+        assert_eq!(Solution::find_lhs(vec!(1, 3, 2, 2, 5, 2, 3, 7)), 5);
+        assert_eq!(Solution::find_lhs(vec!(1, 2, 3, 4)), 2);
+        assert_eq!(Solution::find_lhs(vec!(1, 1, 1, 1,)), 0);
+    }
+
     pub fn find_lhs(nums: Vec<i32>) -> i32 {
         let mut nmaps = std::collections::HashMap::with_capacity(2048);
         for n in nums {
@@ -14,17 +23,5 @@ impl Solution {
             }
         }
         ans
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_594() {
-        assert_eq!(Solution::find_lhs(vec!(1, 3, 2, 2, 5, 2, 3, 7)), 5);
-        assert_eq!(Solution::find_lhs(vec!(1, 2, 3, 4)), 2);
-        assert_eq!(Solution::find_lhs(vec!(1, 1, 1, 1,)), 0);
     }
 }

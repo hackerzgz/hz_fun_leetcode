@@ -19,9 +19,14 @@ impl TreeNode {
     }
 }
 
-pub struct Soloution {}
+pub struct Solution {}
 
-impl Soloution {
+impl Solution {
+    pub fn new() -> Self {
+        Solution {}
+    }
+    pub fn run(&self) {}
+
     pub fn find_tilt(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         fn dfs(root: Option<Rc<RefCell<TreeNode>>>) -> (i32, i32) {
             if let Some(n) = root {

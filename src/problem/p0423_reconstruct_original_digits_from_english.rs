@@ -1,7 +1,15 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn original_digits(s: String) -> String {
+    pub fn new() -> Self {
+        Solution {}
+    }
+    pub fn run(&self) {
+        assert_eq!(Solution::original_digits(String::from("owoztneoer")), "012");
+        assert_eq!(Solution::original_digits(String::from("fviefuro")), "45");
+    }
+
+    fn original_digits(s: String) -> String {
         let tra_info = [
             (0, b'z', "ero"),
             (2, b'w', "to"),
@@ -35,16 +43,5 @@ impl Solution {
         });
 
         String::from_utf8(ans).unwrap()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_423() {
-        assert_eq!(Solution::original_digits(String::from("owoztneoer")), "012");
-        assert_eq!(Solution::original_digits(String::from("fviefuro")), "45");
     }
 }

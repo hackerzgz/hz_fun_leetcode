@@ -1,6 +1,18 @@
 pub struct Solution {}
 
 impl Solution {
+    pub fn new() -> Solution {
+        Self {}
+    }
+
+    pub fn run(&self) {
+        assert_eq!(
+            Solution::push_dominoes(String::from(".L.R...LR..L.")),
+            "LL.RR.LLRRLL."
+        );
+        assert_eq!(Solution::push_dominoes(String::from("RR.L")), "RR.L");
+    }
+
     pub fn push_dominoes(dominoes: String) -> String {
         // let mut result = String::from(dominoes.as_str());
         let mut dominoes = format!("L{}R", dominoes).into_bytes();
@@ -36,19 +48,5 @@ impl Solution {
         dominoes.pop();
 
         String::from_utf8(dominoes).unwrap()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    pub fn test_838() {
-        assert_eq!(
-            Solution::push_dominoes(String::from(".L.R...LR..L.")),
-            "LL.RR.LLRRLL."
-        );
-        assert_eq!(Solution::push_dominoes(String::from("RR.L")), "RR.L");
     }
 }

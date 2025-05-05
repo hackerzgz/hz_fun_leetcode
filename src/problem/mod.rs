@@ -8,6 +8,7 @@ pub mod p0400_nth_digit;
 pub mod p0423_reconstruct_original_digits_from_english;
 pub mod p0563_binary_tree_tilt;
 pub mod p0594_longest_harmonious_subsequence;
+pub mod p0677_map_sum_pairs;
 pub mod p0728_self_dividing_numbers;
 pub mod p0827_making_a_large_island;
 pub mod p0838_push_dominoes;

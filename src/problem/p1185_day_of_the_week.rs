@@ -1,6 +1,14 @@
 pub struct Solution {}
 
 impl Solution {
+    pub fn new() -> Self {
+        Solution {}
+    }
+
+    pub fn run(&self) {
+        assert_eq!(Solution::day_of_the_week(31, 8, 2019), "Saturday");
+    }
+
     pub fn day_of_the_week(day: i32, month: i32, year: i32) -> String {
         let month_days = [
             31,
@@ -43,15 +51,5 @@ impl Solution {
             }))
             % 7) as usize]
             .to_string()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_1185() {
-        assert_eq!(Solution::day_of_the_week(31, 8, 2019), "Saturday");
     }
 }

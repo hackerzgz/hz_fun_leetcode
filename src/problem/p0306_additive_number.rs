@@ -8,10 +8,10 @@ impl Solution {
     }
 
     pub fn run(&self) {
-        assert!(self.is_additive_number("112358"))
+        assert!(Self::is_additive_number("112358"))
     }
 
-    fn is_additive_number(&self, num: &str) -> bool {
+    fn is_additive_number(num: &str) -> bool {
         (0..num.len() - 1).any(|i| valid_from(i, &num))
     }
 }

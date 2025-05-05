@@ -9,17 +9,17 @@ impl Solution {
 
     pub fn run(&self) {
         assert_eq!(
-            self.max_product(vec!["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]),
+            Self::max_product(vec!["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]),
             16
         );
 
         assert_eq!(
-            self.max_product_fast(vec!["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]),
+            Self::max_product_fast(vec!["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]),
             16
         );
     }
 
-    fn max_product(&self, words: Vec<&str>) -> i32 {
+    fn max_product(words: Vec<&str>) -> i32 {
         let masks: Vec<i32> = words
             .iter()
             .map(|word| {

@@ -35,19 +35,20 @@ impl MapSum {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub struct Solution {}
 
-    #[test]
-    fn test_map_sum() {
-        let mapsum = MapSum::new();
+impl Solution {
+    pub fn new() -> Self {
+        Solution {}
+    }
 
-        mapsum.insert("apple", 3);
-        assert_eq!(mapsum.sum(), 3);
+    pub fn run(&self) {
+        let mut mapsum = MapSum::new();
 
-        mapsum.insert("app", 2);
-        assert_eq!(mapsum.sum(), 5);
-        return 0;
+        mapsum.insert("apple".to_string(), 3);
+        assert_eq!(mapsum.sum("ap".to_string()), 3);
+
+        mapsum.insert("app".to_string(), 2);
+        assert_eq!(mapsum.sum("ap".to_string()), 5);
     }
 }

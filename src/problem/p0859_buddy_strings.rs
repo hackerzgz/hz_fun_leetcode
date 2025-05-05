@@ -6,10 +6,10 @@ impl Solution {
     }
 
     pub fn run(&self) {
-        assert!(self.buddy_strings("ab", "ba"))
+        assert!(Self::buddy_strings("ab", "ba"))
     }
 
-    fn buddy_strings(&self, s: &str, goal: &str) -> bool {
+    fn buddy_strings(s: &str, goal: &str) -> bool {
         if s.len() != goal.len() {
             return false;
         }
