@@ -39,7 +39,7 @@ impl Solution {
         ans as i32
     }
 
-    fn max_product_fast(&self, words: Vec<&str>) -> i32 {
+    fn max_product_fast(words: Vec<&str>) -> i32 {
         let masks = words.iter().fold(HashMap::new(), |mut map, w| {
             let mask = w.chars().fold(0, |acc, c| acc | 1 << (c as u8 - 'a' as u8));
 
