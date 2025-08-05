@@ -7,14 +7,15 @@ use problem::{
     p0397_integer_replacement, p0400_nth_digit, p0423_reconstruct_original_digits_from_english,
     p0563_binary_tree_tilt, p0594_longest_harmonious_subsequence, p0677_map_sum_pairs,
     p0728_self_dividing_numbers, p0827_making_a_large_island, p0838_push_dominoes,
-    p0859_buddy_strings, p1025_divisor_game, p1185_day_of_the_week,
+    p0859_buddy_strings, p0904_total_fruit, p1025_divisor_game, p1185_day_of_the_week,
     p2016_maximum_difference_between_increasing_elements, p2022_convert_1d_array_into_2d_array,
     p2131_longest_palindrome, p3560_min_cutting_cost,
 };
 
 use crate::problem::{
-    p0559_maximum_depth, p0560_subarray_sum, p0740_delete_and_earn, p3576_can_make_equal,
-    p3583_special_triplets, p3584_maximum_product,
+    p0559_maximum_depth, p0560_subarray_sum, p0740_delete_and_earn, p3477_num_of_unplaced_fruits,
+    p3478_num_of_unplaced_fruits, p3576_can_make_equal, p3583_special_triplets,
+    p3584_maximum_product,
 };
 
 #[derive(Parser, Debug)]
@@ -52,11 +53,14 @@ fn main() {
         827 => problem!(p0827_making_a_large_island),
         838 => problem!(p0838_push_dominoes),
         859 => problem!(p0859_buddy_strings),
+        904 => problem!(p0904_total_fruit),
         1025 => problem!(p1025_divisor_game),
         1185 => problem!(p1185_day_of_the_week),
         2016 => problem!(p2016_maximum_difference_between_increasing_elements),
         2022 => problem!(p2022_convert_1d_array_into_2d_array),
         2131 => problem!(p2131_longest_palindrome),
+        3477 => problem!(p3477_num_of_unplaced_fruits),
+        3478 => problem!(p3478_num_of_unplaced_fruits),
         3560 => problem!(p3560_min_cutting_cost),
         3576 => problem!(p3576_can_make_equal),
         3583 => problem!(p3583_special_triplets),
