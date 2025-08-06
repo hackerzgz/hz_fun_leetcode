@@ -1,6 +1,7 @@
 pub mod problem;
 
 use clap::Parser;
+use problem::Solver;
 use problem::{
     p0135_candy, p0215_kth_largest_element_in_an_array, p0306_additive_number,
     p0318_maximum_product_of_word_lengths, p0319_bulb_switcher, p0384_shuffle_an_array,
@@ -13,9 +14,9 @@ use problem::{
 };
 
 use crate::problem::{
-    p0559_maximum_depth, p0560_subarray_sum, p0740_delete_and_earn, p3477_num_of_unplaced_fruits,
-    p3478_num_of_unplaced_fruits, p3576_can_make_equal, p3583_special_triplets,
-    p3584_maximum_product,
+    p0559_maximum_depth, p0560_subarray_sum, p0740_delete_and_earn, p2561_rearranging_fruits,
+    p3477_num_of_unplaced_fruits, p3478_num_of_unplaced_fruits, p3576_can_make_equal,
+    p3583_special_triplets, p3584_maximum_product,
 };
 
 #[derive(Parser, Debug)]
@@ -59,6 +60,7 @@ fn main() {
         2016 => problem!(p2016_maximum_difference_between_increasing_elements),
         2022 => problem!(p2022_convert_1d_array_into_2d_array),
         2131 => problem!(p2131_longest_palindrome),
+        2561 => problem!(p2561_rearranging_fruits),
         3477 => problem!(p3477_num_of_unplaced_fruits),
         3478 => problem!(p3478_num_of_unplaced_fruits),
         3560 => problem!(p3560_min_cutting_cost),

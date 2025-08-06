@@ -24,9 +24,15 @@ pub mod p1561_max_coins;
 pub mod p2016_maximum_difference_between_increasing_elements;
 pub mod p2022_convert_1d_array_into_2d_array;
 pub mod p2131_longest_palindrome;
+pub mod p2561_rearranging_fruits;
 pub mod p3477_num_of_unplaced_fruits;
 pub mod p3478_num_of_unplaced_fruits;
 pub mod p3560_min_cutting_cost;
 pub mod p3576_can_make_equal;
 pub mod p3583_special_triplets;
 pub mod p3584_maximum_product;
+
+pub trait Solver {
+    fn new() -> Self;
+    fn run(&self);
+}

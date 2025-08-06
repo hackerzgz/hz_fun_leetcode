@@ -17,7 +17,9 @@ impl Solution {
         );
     }
 
-    pub fn num_of_unplaced_fruits(fruits: Vec<i32>, mut buckets: Vec<i32>) -> i32 {}
+    pub fn num_of_unplaced_fruits(fruits: Vec<i32>, mut buckets: Vec<i32>) -> i32 {
+        0
+    }
 }
 
 struct SegTree {}
