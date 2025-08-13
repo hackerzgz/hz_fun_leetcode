@@ -25,6 +25,7 @@ fn main() {
         307 => problem!(p0307_range_sum_query_mutable),
         318 => problem!(p0318_maximum_product_of_word_lengths),
         319 => problem!(p0319_bulb_switcher),
+        326 => problem!(p0326_power_of_three),
         384 => problem!(p0384_shuffle_an_array),
         397 => problem!(p0397_integer_replacement),
         400 => problem!(p0400_nth_digit),

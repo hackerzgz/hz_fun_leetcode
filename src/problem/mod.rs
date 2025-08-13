@@ -4,6 +4,7 @@ pub mod p0306_additive_number;
 pub mod p0307_range_sum_query_mutable;
 pub mod p0318_maximum_product_of_word_lengths;
 pub mod p0319_bulb_switcher;
+pub mod p0326_power_of_three;
 pub mod p0384_shuffle_an_array;
 pub mod p0397_integer_replacement;
 pub mod p0400_nth_digit;
