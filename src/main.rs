@@ -53,6 +53,7 @@ fn main() {
             1185 => problem!(p1185_day_of_the_week),
             1277 => problem!(p1277_count_squares),
             2016 => problem!(p2016_maximum_difference_between_increasing_elements),
+            2106 => problem!(p2106_max_total_fruits),
             2022 => problem!(p2022_convert_1d_array_into_2d_array),
             2131 => problem!(p2131_longest_palindrome),
             2348 => problem!(p2348_zero_filled_subarray),
