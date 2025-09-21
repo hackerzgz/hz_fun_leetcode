@@ -73,6 +73,7 @@ fn main() {
             3583 => problem!(p3583_special_triplets),
             3584 => problem!(p3584_maximum_product),
 
+            9999 => problem!(p9999_playground),
             _ => unimplemented!("problem not found"),
         }
     }

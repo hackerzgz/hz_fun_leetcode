@@ -50,6 +50,7 @@ pub mod p3560_min_cutting_cost;
 pub mod p3576_can_make_equal;
 pub mod p3583_special_triplets;
 pub mod p3584_maximum_product;
+pub mod p9999_playground;
 
 pub trait Solver {
     fn new() -> Self;
