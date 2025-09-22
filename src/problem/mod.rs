@@ -41,6 +41,7 @@ pub mod p2438_range_product_queries_of_powers;
 pub mod p2561_rearranging_fruits;
 pub mod p2785_sort_vowels;
 pub mod p2787_ways_to_express_an_integer_as_sum_of_powers;
+pub mod p3021_flower_game;
 pub mod p3227_does_alice_win;
 pub mod p3363_maximum_number_of_fruits_collected;
 pub mod p3477_num_of_unplaced_fruits;

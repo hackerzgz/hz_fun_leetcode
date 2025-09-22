@@ -65,6 +65,7 @@ fn main() {
             2785 => problem!(p2785_sort_vowels),
             2787 => problem!(p2787_ways_to_express_an_integer_as_sum_of_powers),
             3227 => problem!(p3227_does_alice_win),
+            3021 => problem!(p3021_flower_game),
             3363 => problem!(p3363_maximum_number_of_fruits_collected),
             3477 => problem!(p3477_num_of_unplaced_fruits),
             3478 => problem!(p3478_num_of_unplaced_fruits),
