@@ -157,4 +157,24 @@ impl Solution {
 
         ans
     }
+
+    pub fn get_valid_t9_words(num: String, words: Vec<String>) -> Vec<String> {
+        let tab = "22233344455566677778889999".as_bytes();
+        let num = num.as_bytes();
+        words
+            .into_iter()
+            .filter_map(|w| {
+                let t: Vec<_> = w
+                    .as_bytes()
+                    .iter()
+                    .map(|c| tab[(c - b'a') as usize])
+                    .collect();
+                if t == num {
+                    Some(w)
+                } else {
+                    None
+                }
+            })
+            .collect()
+    }
 }
