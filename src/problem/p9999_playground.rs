@@ -1,5 +1,3 @@
-use std::num;
-
 use crate::problem::Solver;
 
 pub struct Solution {}
@@ -10,6 +8,11 @@ impl Solver for Solution {
     }
 
     fn run(&self) {
+        assert_eq!(
+            Solution::find_whether_exists_path(3, vec![vec![0, 1], vec![0, 2]], 0, 2),
+            true
+        );
+
         assert_eq!(Self::diving_board(1, 2, 3), vec![3, 4, 5, 6]);
 
         assert_eq!(
@@ -30,6 +33,41 @@ impl Solver for Solution {
 }
 
 impl Solution {
+    pub fn find_whether_exists_path(n: i32, graph: Vec<Vec<i32>>, start: i32, target: i32) -> bool {
+        let n = n as usize;
+        let start = start as usize;
+        let target = target as usize;
+
+        let mut next_graph = vec![vec![]; n];
+        for edge in graph {
+            let u = edge[0] as usize;
+            let v = edge[1] as usize;
+            next_graph[u].push(v);
+        }
+
+        let mut visited = vec![false; n];
+        Self::fwep_dfs(&next_graph, &mut visited, start, target)
+    }
+
+    fn fwep_dfs(
+        next_graph: &[Vec<usize>],
+        visited: &mut Vec<bool>,
+        curr: usize,
+        target: usize,
+    ) -> bool {
+        if curr == target {
+            return true;
+        }
+        visited[curr] = true;
+
+        for &nb in &next_graph[curr] {
+            if !visited[nb] && Self::fwep_dfs(next_graph, visited, nb, target) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     pub fn diving_board(shorter: i32, longer: i32, k: i32) -> Vec<i32> {
         if k == 0 {
             return vec![];
