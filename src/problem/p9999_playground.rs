@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::problem::Solver;
 
 pub struct Solution {}
@@ -28,6 +30,14 @@ impl Solver for Solution {
         assert_eq!(
             Solution::max_sub_array(vec![-2, 1, -3, 4, -1, 2, 1, -5, 4]),
             6
+        );
+
+        assert_eq!(
+            Solution::find_longest_subarray(vec![
+                "A", "1", "B", "C", "D", "2", "3", "4", "E", "5", "F", "G", "6", "7", "H", "I",
+                "J", "K", "L", "M"
+            ]),
+            vec!["A", "1", "B", "C", "D", "2", "3", "4", "E", "5", "F", "G", "6", "7"]
         );
     }
 }
@@ -176,5 +186,33 @@ impl Solution {
                 }
             })
             .collect()
+    }
+
+    pub fn find_longest_subarray(array: Vec<String>) -> Vec<String> {
+        let mut s = vec![0; array.len() + 1];
+        for (i, c) in array.iter().enumerate() {
+            s[i + 1] = s[i] + c.bytes().nth(0).unwrap() >> 6 & 1 * 2 - 1;
+
+            // EQUAL
+            // if c.bytes().nth(0).unwrap() >= b'A' && c.bytes().nth(0).unwrap() <= b'Z' {
+            //     s[i + 1] = s[i] - 1;
+            // } else {
+            //     s[i + 1] = s[i] + 1;
+            // }
+        }
+
+        let (mut begin, mut end) = (0, 0);
+        let mut first = HashMap::new();
+        for (i, prefix_sum) in s.iter().enumerate() {
+            if let Some(&j) = first.get(&prefix_sum) {
+                if i - j > begin - end {
+                    begin = j;
+                    end = i;
+                }
+            } else {
+                first.insert(prefix_sum, i);
+            }
+        }
+        return array[begin..end].to_vec();
     }
 }
