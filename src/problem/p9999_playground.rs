@@ -34,10 +34,52 @@ impl Solver for Solution {
 
         assert_eq!(
             Solution::find_longest_subarray(vec![
-                "A", "1", "B", "C", "D", "2", "3", "4", "E", "5", "F", "G", "6", "7", "H", "I",
-                "J", "K", "L", "M"
+                "A".to_string(),
+                "1".to_string(),
+                "B".to_string(),
+                "C".to_string(),
+                "D".to_string(),
+                "2".to_string(),
+                "3".to_string(),
+                "4".to_string(),
+                "E".to_string(),
+                "5".to_string(),
+                "F".to_string(),
+                "G".to_string(),
+                "6".to_string(),
+                "7".to_string(),
+                "H".to_string(),
+                "I".to_string(),
+                "J".to_string(),
+                "K".to_string(),
+                "L".to_string(),
+                "M".to_string()
             ]),
             vec!["A", "1", "B", "C", "D", "2", "3", "4", "E", "5", "F", "G", "6", "7"]
+        );
+
+        assert_eq!(
+            Solution::pair_sums(vec![5, 6, 5, 6], 11),
+            vec![vec![5, 6], vec![5, 6]]
+        );
+
+        assert_eq!(
+            Solution::truly_most_popular(
+                vec![
+                    "John(15)".to_string(),
+                    "Jon(12)".to_string(),
+                    "Chris(13)".to_string(),
+                    "Kris(4)".to_string(),
+                    "Christopher(19)".to_string(),
+                ],
+                vec![
+                    "(Jon,John)".to_string(),
+                    "(John,Johnny)".to_string(),
+                    "(Chris,Kris)".to_string(),
+                    "(Chris,Christopher)".to_string(),
+                ],
+            ),
+            vec!["John(27)", "Chris(36)"]
         );
     }
 }
@@ -191,7 +233,7 @@ impl Solution {
     pub fn find_longest_subarray(array: Vec<String>) -> Vec<String> {
         let mut s = vec![0; array.len() + 1];
         for (i, c) in array.iter().enumerate() {
-            s[i + 1] = s[i] + c.bytes().nth(0).unwrap() >> 6 & 1 * 2 - 1;
+            s[i + 1] = s[i] + ((c.bytes().nth(0).unwrap() >> 6 & 1) as i8 * 2 - 1);
 
             // EQUAL
             // if c.bytes().nth(0).unwrap() >= b'A' && c.bytes().nth(0).unwrap() <= b'Z' {
@@ -205,14 +247,97 @@ impl Solution {
         let mut first = HashMap::new();
         for (i, prefix_sum) in s.iter().enumerate() {
             if let Some(&j) = first.get(&prefix_sum) {
-                if i - j > begin - end {
+                if i - j > end - begin {
                     begin = j;
                     end = i;
+                    first.insert(prefix_sum, j);
                 }
             } else {
                 first.insert(prefix_sum, i);
             }
         }
         return array[begin..end].to_vec();
+    }
+
+    pub fn pair_sums(mut nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        if nums.len() < 2 {
+            return vec![];
+        }
+
+        nums.sort();
+
+        let (mut left, mut right) = (0, nums.len() - 1);
+        let mut ans = Vec::with_capacity(4);
+
+        while left < right {
+            let lhs = nums[left];
+            let rhs = nums[right];
+            if lhs + rhs == target {
+                ans.push(vec![lhs, rhs]);
+                left += 1;
+                right -= 1;
+            } else if lhs + rhs < target {
+                left += 1;
+            } else {
+                right -= 1;
+            }
+        }
+
+        ans
+    }
+
+    pub fn truly_most_popular(names: Vec<String>, synonyms: Vec<String>) -> Vec<String> {
+        let mut counts: HashMap<String, i32> = HashMap::new();
+        for name in names {
+            let left = name.find('(').unwrap();
+            // println!("left: {}", left);
+            let count = name[left + 1..name.len() - 1].parse::<i32>().unwrap();
+            let raw_name = name[0..left].to_string();
+            counts.entry(raw_name).or_insert(count);
+        }
+
+        // 并查集
+        // <node, root>
+        let mut mp: HashMap<String, String> = HashMap::new();
+        for synonym in synonyms {
+            let comm = synonym.find(',').unwrap();
+            let mut left = synonym[1..comm].to_string();
+            let mut right = synonym[comm + 1..synonym.len() - 1].to_string();
+
+            while mp.contains_key(&left) {
+                left = mp.get(&left).unwrap().clone();
+            }
+            while mp.contains_key(&right) {
+                right = mp.get(&right).unwrap().clone();
+            }
+            // 如果是共同的祖先，那么就不用再处理了
+            if left == right {
+                continue;
+            }
+
+            let left_count = *counts.get(&left).unwrap_or(&0);
+            let right_count = *counts.get(&right).unwrap_or(&0);
+
+            // 找到新根节点以及当前节点
+            let root = left.clone().min(right.clone());
+            let node = left.clone().max(right.clone());
+
+            while !counts.contains_key(&left) && !counts.contains_key(&right) {
+                mp.insert(node.clone(), root.clone());
+                continue;
+            }
+
+            // 移除当前节点总数
+            counts.remove(node.as_str());
+            // 将当前节点总数累加到根节点上
+            counts.insert(root.clone(), left_count + right_count);
+            // 添加映射关系
+            mp.insert(node, root);
+        }
+
+        counts
+            .iter()
+            .map(|(name, count)| format!("{}({})", name, count))
+            .collect()
     }
 }
