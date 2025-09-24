@@ -63,24 +63,34 @@ impl Solver for Solution {
             vec![vec![5, 6], vec![5, 6]]
         );
 
+        // assert_eq!(
+        //     Solution::truly_most_popular(
+        //         vec![
+        //             "John(15)".to_string(),
+        //             "Jon(12)".to_string(),
+        //             "Chris(13)".to_string(),
+        //             "Kris(4)".to_string(),
+        //             "Christopher(19)".to_string(),
+        //         ],
+        //         vec![
+        //             "(Jon,John)".to_string(),
+        //             "(John,Johnny)".to_string(),
+        //             "(Chris,Kris)".to_string(),
+        //             "(Chris,Christopher)".to_string(),
+        //         ],
+        //     ),
+        //     vec!["John(27)", "Chris(36)"]
+        // );
+
         assert_eq!(
-            Solution::truly_most_popular(
-                vec![
-                    "John(15)".to_string(),
-                    "Jon(12)".to_string(),
-                    "Chris(13)".to_string(),
-                    "Kris(4)".to_string(),
-                    "Christopher(19)".to_string(),
-                ],
-                vec![
-                    "(Jon,John)".to_string(),
-                    "(John,Johnny)".to_string(),
-                    "(Chris,Kris)".to_string(),
-                    "(Chris,Christopher)".to_string(),
-                ],
+            Solution::best_seq_at_index(
+                vec![65, 70, 56, 75, 60, 68],
+                vec![100, 150, 90, 190, 95, 110],
             ),
-            vec!["John(27)", "Chris(36)"]
+            6
         );
+
+        assert_eq!(Solution::get_kth_magic_number(7), 21);
     }
 }
 
@@ -339,5 +349,72 @@ impl Solution {
             .iter()
             .map(|(name, count)| format!("{}({})", name, count))
             .collect()
+    }
+
+    pub fn best_seq_at_index(height: Vec<i32>, weight: Vec<i32>) -> i32 {
+        assert_eq!(height.len(), weight.len());
+        if height.len() == 0 {
+            return 0;
+        }
+
+        let mut peoples: Vec<(i32, i32)> = weight
+            .iter()
+            .enumerate()
+            .map(|(i, &w)| (height[i], w))
+            .collect();
+
+        peoples.sort_by(|lhs, rhs| {
+            if lhs.0 == rhs.0 {
+                return rhs.1.cmp(&lhs.1);
+            }
+            return lhs.0.cmp(&rhs.0);
+        });
+
+        let mut dp: Vec<(i32, i32)> = Vec::with_capacity(peoples.len());
+        for p in peoples {
+            let (mut left, mut right) = (0, dp.len());
+            while left < right {
+                let mid = left + ((right - left) >> 1);
+                if dp[mid].1 < p.1 {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+
+            if left == dp.len() {
+                // 如果找到的位置超出当前dp长度，添加到末尾
+                dp.push(p);
+            } else {
+                // 否则替换该位置的值，让后面的数字更容易接上
+                dp[left] = p;
+            }
+        }
+
+        dp.len() as i32
+    }
+
+    pub fn get_kth_magic_number(k: i32) -> i32 {
+        let (mut i3, mut i5, mut i7) = (1, 1, 1);
+        let mut ans = vec![0; k as usize + 1];
+        ans[1] = 1;
+        for i in 2..=k {
+            let next3 = ans[i3] * 3;
+            let next5 = ans[i5] * 5;
+            let next7 = ans[i7] * 7;
+
+            let min = next3.min(next5).min(next7);
+            ans[i as usize] = min;
+
+            if min == next3 {
+                i3 += 1;
+            } else if min == next5 {
+                i5 += 1;
+            } else if min == next7 {
+                i7 += 1;
+            }
+        }
+
+        ans[k as usize]
     }
 }
