@@ -91,6 +91,28 @@ impl Solver for Solution {
         );
 
         assert_eq!(Solution::get_kth_magic_number(7), 21);
+
+        assert_eq!(Solution::majority_element(vec![4, 5, 4]), 4);
+
+        assert_eq!(
+            Solution::find_closest(
+                vec![
+                    "I".to_string(),
+                    "am".to_string(),
+                    "a".to_string(),
+                    "student".to_string(),
+                    "from".to_string(),
+                    "a".to_string(),
+                    "university".to_string(),
+                    "in".to_string(),
+                    "a".to_string(),
+                    "city".to_string(),
+                ],
+                "a".to_string(),
+                "student".to_string()
+            ),
+            1
+        );
     }
 }
 
@@ -395,10 +417,10 @@ impl Solution {
     }
 
     pub fn get_kth_magic_number(k: i32) -> i32 {
-        let (mut i3, mut i5, mut i7) = (1, 1, 1);
-        let mut ans = vec![0; k as usize + 1];
-        ans[1] = 1;
-        for i in 2..=k {
+        let (mut i3, mut i5, mut i7) = (0, 0, 0);
+        let mut ans = vec![0; k as usize];
+        ans[0] = 1;
+        for i in 1..k {
             let next3 = ans[i3] * 3;
             let next5 = ans[i5] * 5;
             let next7 = ans[i7] * 7;
@@ -408,13 +430,69 @@ impl Solution {
 
             if min == next3 {
                 i3 += 1;
-            } else if min == next5 {
+            }
+            if min == next5 {
                 i5 += 1;
-            } else if min == next7 {
+            }
+            if min == next7 {
                 i7 += 1;
             }
         }
+        ans[k as usize - 1]
+    }
 
-        ans[k as usize]
+    pub fn majority_element(nums: Vec<i32>) -> i32 {
+        let l = nums.len();
+        if l == 0 {
+            return -1;
+        }
+        if l == 1 {
+            return nums[0];
+        }
+
+        let (mut num, mut count) = (0, 0);
+        for &n in &nums {
+            if count == 0 {
+                num = n;
+            }
+            if n == num {
+                count += 1;
+            } else {
+                count -= 1;
+            }
+        }
+
+        count = 0;
+        for n in nums {
+            if n == num {
+                count += 1;
+            }
+            if count > (l >> 1) {
+                return num;
+            }
+        }
+
+        -1
+    }
+
+    pub fn find_closest(words: Vec<String>, word1: String, word2: String) -> i32 {
+        let (mut idx1, mut idx2) = (-1, -1);
+        let mut min_distance = i32::MAX;
+
+        for (i, w) in words.iter().enumerate() {
+            match w {
+                w if w == &word1 => idx1 = i as i32,
+                w if w == &word2 => idx2 = i as i32,
+                _ => continue,
+            }
+
+            if idx1 >= 0 && idx2 >= 0 {
+                min_distance = min_distance.min((idx1 - idx2).abs());
+                if min_distance == 1 {
+                    return min_distance;
+                }
+            }
+        }
+        min_distance
     }
 }

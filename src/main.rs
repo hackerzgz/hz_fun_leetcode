@@ -52,6 +52,7 @@ fn main() {
             1025 => problem!(p1025_divisor_game),
             1185 => problem!(p1185_day_of_the_week),
             1277 => problem!(p1277_count_squares),
+            1488 => problem!(p1488_avoid_flood),
             1733 => problem!(p1733_minimum_teachings),
             1780 => problem!(p1780_check_powers_of_three),
             2016 => problem!(p2016_maximum_difference_between_increasing_elements),

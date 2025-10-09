@@ -26,6 +26,7 @@ pub mod p0904_total_fruit;
 pub mod p1025_divisor_game;
 pub mod p1185_day_of_the_week;
 pub mod p1277_count_squares;
+pub mod p1488_avoid_flood;
 pub mod p1504_num_submat;
 pub mod p1561_max_coins;
 pub mod p1733_minimum_teachings;
