@@ -1,3 +1,4 @@
+pub mod p0042_trap;
 pub mod p0135_candy;
 pub mod p0215_kth_largest_element_in_an_array;
 pub mod p0306_additive_number;

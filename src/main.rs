@@ -25,6 +25,7 @@ fn main() {
 
     if let Some(pb) = leetcode.problem {
         match pb {
+            42 => problem!(p0042_trap),
             135 => problem!(p0135_candy),
             215 => problem!(p0215_kth_largest_element_in_an_array),
             306 => problem!(p0306_additive_number),

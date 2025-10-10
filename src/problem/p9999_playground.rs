@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use crate::problem::Solver;
 
@@ -112,6 +112,11 @@ impl Solver for Solution {
                 "student".to_string()
             ),
             1
+        );
+
+        assert_eq!(
+            Solution::longest_consecutive(vec![100, 4, 200, 1, 3, 4, 2]),
+            4
         );
     }
 }
@@ -494,5 +499,29 @@ impl Solution {
             }
         }
         min_distance
+    }
+
+    pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
+        let mut longest = 0i32;
+        let num_sets = nums.iter().fold(HashSet::new(), |mut ns, n| {
+            if !ns.contains(&n) {
+                ns.insert(n);
+            }
+            ns
+        });
+
+        for &n in num_sets.iter() {
+            if !num_sets.contains(&(n - 1)) {
+                let mut next = n + 1;
+                let mut ans = 1i32;
+                while num_sets.contains(&next) {
+                    ans += 1;
+                    next += 1;
+                }
+
+                longest = longest.max(ans);
+            }
+        }
+        longest
     }
 }
