@@ -26,10 +26,17 @@ impl Solution {
             stack.push((pow, count));
         }
 
-        let mut ans = 0_i64;
+        let mut j = 0_usize;
         let mut dp = vec![0 as i64; stack.len() + 1];
-        for i in 0..stack.len() {}
 
-        ans
+        for i in 0..stack.len() {
+            while stack[j].0 < stack[i].0 - 2 {
+                j += 1;
+            }
+
+            dp[i + 1] = dp[i].max(dp[j] + stack[i].0 as i64 * stack[i].1 as i64);
+        }
+
+        dp[stack.len()]
     }
 }
