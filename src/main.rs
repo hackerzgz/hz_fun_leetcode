@@ -70,6 +70,7 @@ fn main() {
             3227 => problem!(p3227_does_alice_win),
             3021 => problem!(p3021_flower_game),
             3147 => problem!(p3147_maximum_energy),
+            3186 => problem!(p3186_maximum_total_damage),
             3363 => problem!(p3363_maximum_number_of_fruits_collected),
             3477 => problem!(p3477_num_of_unplaced_fruits),
             3478 => problem!(p3478_num_of_unplaced_fruits),
